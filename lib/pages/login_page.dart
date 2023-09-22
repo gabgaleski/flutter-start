@@ -1,3 +1,4 @@
+import 'package:firstapp/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -137,12 +138,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextButton(
                         onPressed: () {
                           if (emailController.text.trim() == "email@email.com" && senhaController.text.trim() == "123") {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Login realizado com sucesso!"),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainPage()));
+
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
