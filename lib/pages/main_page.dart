@@ -1,4 +1,7 @@
 import 'package:firstapp/pages/dados_cadastrais.dart';
+import 'package:firstapp/pages/page1.dart';
+import 'package:firstapp/pages/page2.dart';
+import 'package:firstapp/pages/page3.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -9,6 +12,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  PageController controller = PageController(initialPage: 0);
+  int position = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +31,7 @@ class _MainPageState extends State<MainPage> {
                     child: const Text("Dados Cadastrais")),
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Dados(texto: "Cadastro", dados: ["Nome", "Email", "Telefone", "Endereço"])));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Dados()));
 
                   },
                   ),
@@ -48,23 +53,40 @@ class _MainPageState extends State<MainPage> {
                     child: const Text("Configurações")),
                   onTap: () {},
                   ),
-                Divider(),
+                const Divider(),
 
               ],
             ),
           ),
         ),
-        body: PageView(
+        body: Column(
           children: [
-            Container(
-              color: Colors.blueGrey,
+            Expanded(
+              child: PageView(
+                controller: controller,
+                onPageChanged: (value) {
+                  setState(() {
+                    position = value;
+                  });
+                },
+                children: const [
+                  Pagina1Page(),
+                  Pagina2Page(),
+                  Pagina3Page()
+                ],
+              ),
             ),
-            Container(
-              color: Colors.red,
-            ),
-            Container(
-              color: Colors.green,
-            ),
+            BottomNavigationBar(
+              onTap: (value) {
+                controller.jumpToPage(value);
+              },
+              currentIndex: position,
+              items:const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+                BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+                BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+              ]
+              )
           ],
         ),
         appBar:
