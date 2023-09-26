@@ -1,7 +1,7 @@
-import 'package:firstapp/pages/dados_cadastrais.dart';
 import 'package:firstapp/pages/page1.dart';
 import 'package:firstapp/pages/page2.dart';
 import 'package:firstapp/pages/page3.dart';
+import 'package:firstapp/shared/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,47 +18,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    width: double.infinity,
-                    child: const Text("Dados Cadastrais")),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Dados()));
-
-                  },
-                  ),
-                const Divider(),
-                const SizedBox(height: 10,),
-                                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    width: double.infinity,
-                    child: const Text("Termos de uso e privacidade")),
-                  onTap: () {},
-                  ),
-                const Divider(),
-                const SizedBox(height: 10,),
-                                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    width: double.infinity,
-                    child: const Text("Configurações")),
-                  onTap: () {},
-                  ),
-                const Divider(),
-
-              ],
-            ),
-          ),
-        ),
+        drawer: const CustomDrawer(),
         body: Column(
           children: [
             Expanded(
