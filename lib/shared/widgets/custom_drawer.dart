@@ -1,4 +1,5 @@
 import 'package:firstapp/pages/dados_cadastrais.dart';
+import 'package:firstapp/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -116,6 +117,51 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {},
           ),
           const Divider(),
+          const SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                width: double.infinity,
+                child: const Row(
+                  children: [
+                    Icon(Icons.exit_to_app),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text("Sair"),
+                  ],
+                )),
+            onTap: () {
+              showDialog(context: context, builder: (BuildContext bc) {
+                return AlertDialog(
+                  alignment: Alignment.center,
+                  elevation: 8,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  title: const Text("Meu App"),
+                  content: const Wrap(children: [
+                    Text("Deseja realmente sair?"),
+                  ]),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text("Nao")),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                        },
+                        child: const Text("Sim")),
+                  ],
+                );
+              });
+            },
+          ),
         ],
       ),
     );
