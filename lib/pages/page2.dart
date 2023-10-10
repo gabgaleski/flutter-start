@@ -11,6 +11,7 @@ class _Pagina2PageState extends State<Pagina2Page> {
   TextEditingController peso = TextEditingController(text: "");
   TextEditingController altura = TextEditingController(text: "");
   var imc = 0;
+  var box = Hive.box('box');
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,6 +35,7 @@ class _Pagina2PageState extends State<Pagina2Page> {
           onPressed: () {
             setState(() {
               imc = int.parse(peso.text) ~/ ((int.parse(altura.text) * 2) / 100);
+              box.put('imc', imc);
             });
           },
           child: const Text("Calcular"),
